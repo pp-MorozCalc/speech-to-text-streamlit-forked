@@ -2,24 +2,32 @@ import os
 import whisper
 import streamlit as st
 
+# Set page config
 st.set_page_config(
-    page_title="Whisper based ASR",
-    page_icon="musical_note",
-    layout="wide",
-    initial_sidebar_state="auto",
+    page_title='AI Speech to Text converter',
+    page_icon='🎙️',
+    layout='centered',
+    initial_sidebar_state='auto',
 )
+
+# UI
+st.title('Расшифруйте аудио или видео в текст ✨')
+st.info('Загрузите ваш файл и получите его текстовую расшифровку. Сервис поддерживает все популярные аудио и видео форматы.')
+st.divider()
 
 upload_files_directory = 'uploads/'
 
-# Загружаем аудиофайл
+# Upload audio or video file
 def Upload_audio_file():
-    # Uploadind file
+    # Upload file
     uploaded_object = st.file_uploader(
         type=['opus', 'mp3', 'aac', 'flac', 'wv', 'wav',
               'mp4', 'mov', 'wmv', 'webm', 'avi', 'mkv'],
         label='Выберите аудио или видео для распознавания',
         accept_multiple_files=False,
     )
+
+    # Save uploaded bytes as file
     if uploaded_object is not None:
         with open(os.path.join(upload_files_directory, uploaded_object.name), 'wb') as file:
             file.write(uploaded_object.getbuffer())
@@ -27,22 +35,17 @@ def Upload_audio_file():
     else:
         return None
 
-# Транскрибируем аудио
+# Transcribe audio
 def Trasncribe(audio):
-    # Транскрибация аудио в текст
     model = whisper.load_model('base')
     result = model.transcribe(audio)
     st.write(result['text'])
 
-# UI заголовок
-st.title('Транскрибация аудио')
-
-# Передача Bytes в аудиофайл
+# Getting name of uploading file to put it into model
 audio_file = Upload_audio_file()
 
-# Вызов функции Trasncribe
-action = st.button('Распознать аудио')
+# Call Trasncribe function
+action = st.button('Распознать аудио', type='primary')
 if action:
-    st.title('Транскрипция')
-    st.subheader(audio_file + ':')
+    st.subheader(audio_file)
     st.write(Trasncribe(os.path.join(upload_files_directory, audio_file)))
