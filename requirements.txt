@@ -1,7 +1,5 @@
 fastapi
 os
 streamlit
-starlette
 whisper
 uvicorn
-ffmpeg
