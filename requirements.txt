@@ -4,5 +4,4 @@ streamlit
 starlette
 whisper
 uvicorn
-python-multipart
-ffmpeg-python
+ffmpeg
