@@ -1,5 +1,6 @@
 fastapi
-os
-streamlit
+starlette
 whisper
 uvicorn
+python-multipart
+ffmpeg-python
