@@ -1,6 +1,6 @@
 fastapi
 starlette
-whisper
+openai-whisper
 uvicorn
 python-multipart
 ffmpeg-python
