@@ -3,4 +3,4 @@ starlette
 openai-whisper
 uvicorn
 python-multipart
-ffmpeg
+ffmpeg-python
